@@ -1,0 +1,175 @@
+<!-- client.html -->
+<!DOCTYPE html>
+<html ng-app="agsApp">
+
+<head>
+    <!-- SCROLLS -->
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
+
+    <!-- SPELLS -->
+    <!-- load angular via CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+
+<!-- HEADER AND NAVBAR -->
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Alternative Green Solutions</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="active"><i class="fa fa-home"></i> Clients</a></li>
+                <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+                <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row" ng-controller="ClientController as clientCtrl">
+        <div class="col-md-4">
+            <table class="table table-condensed table-hover">
+                <tr ng-repeat="client in clientCtrl.clientData" ng-style="{'background-color': $index == selectedIndex ?
+                'lightgray' : ''}" ng-click="selectClient(client, $index)">
+                    <td>
+                        <button class="btn btn-primary">{{client.clientName}}</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Client Details</div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Client Description</dt>
+                        <dd>{{selectedClient.clientDescription}}</dd>
+                        <dt>Sector</dt>
+                        <dd>{{selectedClient.gicsSector}}</dd>
+                        <dt>Sub Industry</dt>
+                        <dd>{{selectedClient.gicsSubIndustry}}</dd>
+                        <dt>Headquarters</dt>
+                        <dd>{{selectedClient.headquarters}}</dd>
+                        <dt>Sites</dt>
+                        <table class="table table-condensed table-hover table-bordered">
+                            <tr ng-repeat="site in clientCtrl.siteData"
+                                ng-click="selectSite(selectedClient, site, $index)">
+                                <td>
+                                    <button class="btn btn-primary">{{site.siteName}}</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Site Details</div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Site Description</dt>
+                        <dd>{{selectedSite.siteDescription}}</dd>
+                        <dt>Primary Contact</dt>
+                        <dd>{{selectedSite.primaryContact}}</dd>
+                        <dt>Capacity</dt>
+                        <dd>{{selectedSite.capacity}}</dd>
+                        <dt>Commercial Date</dt>
+                        <dd>{{selectedSite.commercialDate}}</dd>
+                        <dt>Address</dt>
+                        <dd>{{selectedSite.addrLine1}}
+                            <br>
+                            {{selectedSite.addrCity}}
+                            <br>
+                            {{selectedSite.addrState}}
+                            <br>
+                            {{selectedSite.addrZip}}
+                            <br>
+                            {{selecedSite.addrCountry}}
+                        </dd>
+                        <dt>Turbines</dt>
+                        <table class="table table-condensed table-hover">
+                            <tr ng-repeat="turbine in clientCtrl.turbineData"
+                                ng-click="selectTurbine(selectedClient, selectedSite, turbine, $index)">
+                                <td>
+                                    <button class="btn btn-primary">{{turbine.turbineName}}</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Turbine Details</div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Turbine Name</dt>
+                        <dd>{{selectedTurbine.turbineName}}</dd>
+                        <dt>Turbine Description</dt>
+                        <dd>{{selectedTurbine.turbineDescription}}</dd>
+                        <dt>Turbine Capacity</dt>
+                        <dd>{{selectedTurbine.capacity}}</dd>
+                        <dt>Ramp-Up Time</dt>
+                        <dd>{{selectedTurbine.rampUpTime}}</dd>
+                        <dt>Maintenance Interval</dt>
+                        <dd>{{selectedTurbine.maintenanceInterval}}</dd>
+                        <dt>Serial Number</dt>
+                        <dd>{{selectedTurbine.serialNumber}}</dd>
+                        <dt>Deployed Date</dt>
+                        <dd>{{selectedTurbine.deployedDate}}</dd>
+                        <dt>Total Fired Hours</dt>
+                        <dd>{{selectedTurbine.totalFiredHours}}</dd>
+                        <dt>Total Starts</dt>
+                        <dd>{{selectedTurbine.totalStarts}}</dd>
+                        <dt>Last Planned Outage Date</dt>
+                        <dd>{{selectedTurbine.lastPlanned}}</dd>
+                        <dt>Last Unplanned Outage Date</dt>
+                        <dd>{{selectedTurbine.lastUnplannedOutageDate}}</dd>
+                        <dt>Sensors</dt>
+                        <table class="table table-condensed table-hover">
+                            <tr ng-repeat="sensor in clientCtrl.sensorData"
+                                ng-click="selectSensor(selectedClient, selectedSite, selectedTurbine, sensor, $index)">
+                                <td>
+                                    <button class="btn btn-primary">{{sensor.sensorName}}</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Sensor Details</div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Sensor Name</dt>
+                        <dd>{{selectedSensor.sensorName}}</dd>
+                        <dt>Sensor Description</dt>
+                        <dd>{{selectedSensor.sensorDescription}}</dd>
+                        <dt>Manufacturer</dt>
+                        <dd>{{selectedSensor.manufacturer}}</dd>
+                        <dt>Total Life Expectancy Hours</dt>
+                        <dd>{{selectedSensor.totalLifeExpectancyHours}}</dd>
+                        <dt>Serial Number</dt>
+                        <dd>{{selectedSensor.serialNumber}}</dd>
+                        <dt>Deployed Date</dt>
+                        <dd>{{selectedSensor.deployedDate}}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
