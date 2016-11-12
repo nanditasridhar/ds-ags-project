@@ -7,6 +7,10 @@
     <!-- load bootstrap and fontawesome via CDN -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/signin.css">
 
     <!-- SPELLS -->
     <!-- load angular via CDN -->
@@ -26,6 +30,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" class="active"><i class="fa fa-home"></i> Clients</a></li>
+                <li><a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
                 <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
             </ul>
@@ -73,6 +78,23 @@
         </div>
         <div class="col-md-4">
             <div class="panel panel-primary">
+                <div class="panel-heading">Client Notes</div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover table-bordered">
+                        <thead>
+                        <th>Note Subject</th>
+                        <th>Note Description</th>
+                        </thead>
+                        <tr ng-repeat="note in clientCtrl.noteData">
+                            <td>{{note.noteSubject}}</td>
+                            <td>{{note.noteDescription}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Site Details</div>
                 <div class="panel-body">
                     <dl>
@@ -108,7 +130,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">Turbine Details</div>
                 <div class="panel-body">
@@ -148,7 +170,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">Sensor Details</div>
                 <div class="panel-body">
@@ -168,6 +190,13 @@
                     </dl>
                 </div>
             </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover table-bordered">
+                <tr>
+                    <td ng-repeat="kpi in clientCtrl.kpiFields">{{kpi}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

@@ -11,6 +11,8 @@ agsApp.controller('ClientController', function ($http, $scope) {
     self.siteData = [];
     self.turbineData = [];
     self.sensorData = [];
+    self.noteData = [];
+    self.kpiFields = ["Output", "Heat Rate", "Compressor Efficiency", "Availability", "Reliability", "Fired Hours"];
 
     $http.get(
         'api/Client.php'
@@ -36,7 +38,7 @@ agsApp.controller('ClientController', function ($http, $scope) {
         $scope.selectedIndex = index;
         $scope.selectedClient = client;
         self.siteData = [];
-        self.turbineData =[];
+        self.turbineData = [];
         self.sensorData = [];
         $scope.selectedSite = null;
         console.log("Searching for", client);
@@ -48,6 +50,20 @@ agsApp.controller('ClientController', function ($http, $scope) {
                 console.log("Sites worked!", response.data);
                 console.log("Sites", self.siteData.length);
                 self.siteData = response.data;
+            },
+            function errorCallback(err) {
+                console.log("ERROR", err);
+            }
+        );
+
+        $http.get(
+            'api/ClientNote.php',
+            {params: {clientId: client.clientId}}
+        ).then(
+            function successCallback(response) {
+                console.log("Notes worked!", response.data);
+                console.log("Notes", self.noteData.length);
+                self.noteData = response.data;
             },
             function errorCallback(err) {
                 console.log("ERROR", err);
