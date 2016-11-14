@@ -14,9 +14,11 @@
 
     <!-- SPELLS -->
     <!-- load angular via CDN -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="app.js"></script>
+    <title>Dashboard</title>
 </head>
 <body>
 
@@ -29,17 +31,17 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="active"><i class="fa fa-home"></i> Clients</a></li>
-                <li><a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
-                <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+                <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#" class="active"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="allListings.html"><i class="fa fa-shield"></i> All Listings</a></li>
+                <li><a href="#"><i class="fa fa-comment"></i> Contact</a></li>
             </ul>
         </div>
     </nav>
 </header>
 
-<div class="container">
-    <div class="row" ng-controller="ClientController as clientCtrl">
+<div class="container" ng-controller="ClientController as clientCtrl">
+    <div class="row">
         <div class="col-md-4">
             <table class="table table-condensed table-hover">
                 <tr ng-repeat="client in clientCtrl.clientData" ng-style="{'background-color': $index == selectedIndex ?
@@ -89,11 +91,28 @@
                             <td>{{note.noteSubject}}</td>
                             <td>{{note.noteDescription}}</td>
                         </tr>
+                        <form ng-submit="addClientNote(selectedClient)">
+                            <div class="form-group">
+                                <label for="inpSubject">Subject</label>
+                                <input type="text" class="form-control" id="inpSubject"
+                                       ng-model="clientCtrl.newNoteData.noteSubject" placeholder="Enter subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="inpDescription">Description</label>
+                                <input type="text" class="form-control" id="inpDescription"
+                                       ng-model="clientCtrl.newNoteData.noteDescription"
+                                       placeholder="Enter description">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <br>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Site Details</div>
                 <div class="panel-body">
@@ -130,7 +149,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Turbine Details</div>
                 <div class="panel-body">
@@ -170,7 +189,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Sensor Details</div>
                 <div class="panel-body">
@@ -191,12 +212,44 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <table class="table table-condensed table-hover table-bordered">
-                <tr>
-                    <td ng-repeat="kpi in clientCtrl.kpiFields">{{kpi}}</td>
+                <tr ng-click="selectOutputKpi(selectedClient, selectedSite, selectedTurbine, selectedSensor)">
+                    <td>
+                        <button class="btn btn-primary">Output</button>
+                    </td>
+                </tr>
+                <tr ng-click="selectHeatRateKpi(selectedClient, selectedSite, selectedTurbine, selectedSensor)">
+                    <td>
+                        <button class="btn btn-primary">Heat Rate</button>
+                    </td>
+                </tr>
+                <tr ng-click="selectCompressorEfficiencyKpi(selectedClient, selectedSite, selectedTurbine, selectedSensor)">
+                    <td>
+                        <button class="btn btn-primary">Compressor Efficiency</button>
+                    </td>
+                </tr>
+                <tr ng-click="selectAvailabilityKpi(selectedClient, selectedSite, selectedTurbine, selectedSensor)">
+                    <td>
+                        <button class="btn btn-primary">Availability</button>
+                    </td>
+                </tr>
+                <tr ng-click="selectReliabilityKpi(selectedClient, selectedSite, selectedTurbine, selectedSensor)">
+                    <td>
+                        <button class="btn btn-primary">Reliability</button>
+                    </td>
+                </tr>
+                <tr ng-click="selectFiredHoursKpi(selectedClient, selectedSite, selectedTurbine, selectedSensor)">
+                    <td>
+                        <button class="btn btn-primary">Fired Hours</button>
+                    </td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="outputChart" class="outputChart"></div>
         </div>
     </div>
 </div>

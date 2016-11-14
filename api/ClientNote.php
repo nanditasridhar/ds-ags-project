@@ -14,7 +14,6 @@ if (!$success) {
 $arr = array();
 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     $clientNote = new ClientNote(
-        $row['noteId'],
         $row['clientId'],
         $row['noteSubject'],
         $row['noteDescription']

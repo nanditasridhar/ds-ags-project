@@ -8,7 +8,7 @@ $obj = new ClientNote (
 // STEP 1: Connect to database
 $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD);
 // STEP 2: Prepare query
-$sql = 'INSERT INTO clientNote(clientId, noteSubject, noteDescription) '
+$sql = 'INSERT INTO clientNotes(clientId, noteSubject, noteDescription) '
     . ' VALUES (?,?,?)';
 $statement = $db->prepare($sql);
 // STEP 3: Run the query

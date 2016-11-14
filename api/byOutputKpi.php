@@ -1,7 +1,7 @@
 <?php
 require('../app/environment.php');
 $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD);
-$statement = $db->prepare(' select * from sensorTimeSeries where sensorDeployedId = ?'); // Warning: This returns *many* rows without the LIMIT!
+$statement = $db->prepare(' select sensorDeployedId, dataCollectedDate, output from sensorTimeSeries where sensorDeployedId = ?'); // Warning: This returns *many* rows without the LIMIT!
 $success = $statement->execute(
     array(
         $_GET['sensorDeployedId']

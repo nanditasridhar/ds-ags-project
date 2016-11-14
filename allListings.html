@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="agsApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Listings</title>
+    <!-- SCROLLS -->
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/signin.css">
+
+    <!-- SPELLS -->
+    <!-- load angular via CDN -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<!-- HEADER AND NAVBAR -->
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Alternative Green Solutions</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="client.html"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="#" class="active"><i class="fa fa-shield"></i> All Listings</a></li>
+                <li><a href="#"><i class="fa fa-comment"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="row" ng-controller="AllListingsController as allListCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Clients</h2>
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Sector</th>
+                    <th>Sub Industry</th>
+                    <th>Headquarters</th>
+                    </thead>
+                    <tr ng-repeat="client in allListCtrl.clientData">
+                        <td>
+                            {{client.clientName}}
+                        </td>
+                        <td>{{client.clientDescription}}</td>
+                        <td>{{client.gicsSector}}</td>
+                        <td>{{client.gicsSubIndustry}}</td>
+                        <td>{{client.headquarters}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Sites</h2>
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Primary Contact</th>
+                    <th>Capacity</th>
+                    <th>Commercial Date</th>
+                    </thead>
+                    <tr ng-repeat="site in allListCtrl.siteData">
+                        <td>
+                            {{site.siteName}}
+                        </td>
+                        <td>{{site.siteDescription}}</td>
+                        <td>{{site.primaryContact}}</td>
+                        <td>{{site.capacity}}</td>
+                        <td>{{site.commercialDate}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Turbines</h2>
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Capacity</th>
+                    <th>Ramp Up Time</th>
+                    <th>Maintenance Interval</th>
+                    </thead>
+                    <tr ng-repeat="turbine in allListCtrl.turbineData">
+                        <td>
+                            {{turbine.turbineName}}
+                        </td>
+                        <td>{{turbine.turbineDescription}}</td>
+                        <td>{{turbine.capacity}}</td>
+                        <td>{{turbine.rampUpTime}}</td>
+                        <td>{{turbine.maintenanceInterval}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Sensors</h2>
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Manufacturer</th>
+                    <th>Total Life Expectancy Hours</th>
+                    </thead>
+                    <tr ng-repeat="sensor in allListCtrl.sensorData">
+                        <td>
+                            {{sensor.sensorName}}
+                        </td>
+                        <td>{{sensor.sensorDescription}}</td>
+                        <td>{{sensor.manufacturer}}</td>
+                        <td>{{sensor.totalLifeExpectancyHours}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
